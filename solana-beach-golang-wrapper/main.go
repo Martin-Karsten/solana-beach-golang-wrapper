@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	solana_beach.GetLatestTransactions()
+	solana_beach.FetchLatestTransactions()
 }

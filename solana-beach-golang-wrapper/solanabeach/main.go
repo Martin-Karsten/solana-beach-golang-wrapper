@@ -1,6 +1,7 @@
 package solana_beach
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -10,11 +11,16 @@ import (
 )
 
 var err = godotenv.Load()
-var base_url = "https://api.solanabeach.io/v1/"
+var url = "https://api.solanabeach.io/v1/"
 var bearer = "Bearer " + os.Getenv("TOKEN")
 
-func getResponse(slug string) string {
-	req, err := http.NewRequest("GET", `${base_url}{slug}`, nil)
+func prettyPrint(i interface{}) string {
+	s, _ := json.MarshalIndent(i, "", "\t")
+	return string(s)
+}
+
+func getResponse(slug string) []byte {
+	req, err := http.NewRequest("GET", url+slug, nil)
 
 	req.Header.Add("Authorization", bearer)
 
@@ -29,5 +35,5 @@ func getResponse(slug string) string {
 	if err != nil {
 		log.Println("Error while reading the response bytes:", err)
 	}
-	return string([]byte(body))
+	return body
 }
