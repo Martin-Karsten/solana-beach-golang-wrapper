@@ -64,6 +64,42 @@ type Transaction struct {
 	Ondemand bool `json:"ondemand"`
 }
 
+func FetchTransationByHash(hash string) Transaction {
+	var result Transaction
+
+	if err := json.Unmarshal(getResponse(`transaction/`+hash), &result); err != nil {
+		fmt.Println("Can not unmarshal JSON")
+	}
+
+	fmt.Println(prettyPrint(result))
+
+	return result
+}
+
+func FetchLatestTransactionHashes(address string) Transaction {
+	var result Transaction
+
+	if err := json.Unmarshal(getResponse(`transaction-hashes/`+address), &result); err != nil {
+		fmt.Println("Can not unmarshal JSON")
+	}
+
+	fmt.Println(prettyPrint(result))
+
+	return result
+}
+
+func FetchLatestTransactionsByAddress(address string) Transaction {
+	var result Transaction
+
+	if err := json.Unmarshal(getResponse(`transactions`+address), &result); err != nil {
+		fmt.Println("Can not unmarshal JSON")
+	}
+
+	fmt.Println(prettyPrint(result))
+
+	return result
+}
+
 func FetchLatestTransactions() []Transaction {
 	var result []Transaction
 
@@ -71,9 +107,19 @@ func FetchLatestTransactions() []Transaction {
 		fmt.Println("Can not unmarshal JSON")
 	}
 
+	fmt.Println(prettyPrint(result))
+
 	return result
 }
 
-// func FetchLatestTransactions() string {
-// 	return getResponse(`latest-transactions`)
-// }
+func FetchLatestTransactionsInBlock(number string) Transaction {
+	var result Transaction
+
+	if err := json.Unmarshal(getResponse(`block-transactions`+number), &result); err != nil {
+		fmt.Println("Can not unmarshal JSON")
+	}
+
+	fmt.Println(prettyPrint(result))
+
+	return result
+}
