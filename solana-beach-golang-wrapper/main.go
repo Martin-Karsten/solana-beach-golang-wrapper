@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	solana_beach.FetchLatestTransactions()
+	solana_beach.FetchLatestTransactions(solana_beach.LatestTransactionsParams{Limit: "1"})
 }

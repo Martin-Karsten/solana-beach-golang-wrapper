@@ -19,10 +19,20 @@ func prettyPrint(i interface{}) string {
 	return string(s)
 }
 
-func getResponse(slug string) []byte {
+func getResponse(slug string, params map[string]interface{}) []byte {
 	req, err := http.NewRequest("GET", url+slug, nil)
 
 	req.Header.Add("Authorization", bearer)
+
+	if len(params) > 0 && params != nil {
+		q := req.URL.Query()
+
+		for param, value := range params {
+			if value != "" {
+				q.Add(param, value.(string))
+			}
+		}
+	}
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
