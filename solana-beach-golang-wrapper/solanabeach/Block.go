@@ -2,7 +2,6 @@ package solana_beach
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/fatih/structs"
 )
@@ -42,9 +41,9 @@ type Block struct {
 		Sucessfultxs      int `json:"sucessfultxs"`
 		Innerinstructions int `json:"innerinstructions"`
 	} `json:"metrics"`
-	Programstats []Programstats `json:"programstats"`
-	Rewards      interface{}    `json:"rewards"`
-	Proposer     string         `json:"proposer"`
+	Programstats []interface{} `json:"programstats"`
+	Rewards      interface{}   `json:"rewards"`
+	Proposer     string        `json:"proposer"`
 	ProposerData struct {
 		Name       string `json:"name"`
 		Image      string `json:"image"`
@@ -63,7 +62,7 @@ func FetchBlockHash(hash string) Block {
 	var result Block
 
 	if err := json.Unmarshal(getResponse(`block-hash/`+hash, nil), &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		panic(err)
 	}
 
 	return result
@@ -73,7 +72,7 @@ func FetchBlock(number string) Block {
 	var result Block
 
 	if err := json.Unmarshal(getResponse(`block/`+number, nil), &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		panic(err)
 	}
 
 	return result
@@ -88,7 +87,11 @@ func FetchLatestBlocks(options LatestBlocksParams) []Block {
 	}
 
 	if err := json.Unmarshal(getResponse(`latest-blocks`, params), &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		panic(err)
+	}
+
+	if err := json.Unmarshal(getResponse(`latest-blocks`, params), &result); err != nil {
+		panic(err)
 	}
 
 	return result
@@ -98,7 +101,7 @@ func FetchTopPrograms() TopPrograms {
 	var result TopPrograms
 
 	if err := json.Unmarshal(getResponse(`top-programs`, nil), &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		panic(err)
 	}
 
 	return result

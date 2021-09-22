@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/joho/godotenv"
 )
@@ -21,7 +22,6 @@ func prettyPrint(i interface{}) string {
 
 func getResponse(slug string, params map[string]interface{}) []byte {
 	req, err := http.NewRequest("GET", url+slug, nil)
-
 	req.Header.Add("Authorization", bearer)
 
 	if len(params) > 0 && params != nil {
@@ -29,9 +29,11 @@ func getResponse(slug string, params map[string]interface{}) []byte {
 
 		for param, value := range params {
 			if value != "" {
-				q.Add(param, value.(string))
+				q.Add(strings.ToLower(param), value.(string))
 			}
 		}
+
+		req.URL.RawQuery = q.Encode()
 	}
 
 	client := &http.Client{}
@@ -45,5 +47,6 @@ func getResponse(slug string, params map[string]interface{}) []byte {
 	if err != nil {
 		log.Println("Error while reading the response bytes:", err)
 	}
+
 	return body
 }

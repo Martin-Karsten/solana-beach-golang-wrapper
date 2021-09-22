@@ -55,9 +55,9 @@ type Transaction struct {
 		Relative int `json:"relative"`
 	} `json:"blocktime"`
 	MostImportantInstruction struct {
-		Name   string `json:"name"`
-		Weight int    `json:"weight"`
-		Index  int    `json:"index"`
+		Name   string  `json:"name"`
+		Weight float32 `json:"weight"`
+		Index  int     `json:"index"`
 	} `json:"mostImportantInstruction"`
 	Smart []struct {
 		Type  string `json:"type"`
@@ -75,7 +75,7 @@ func FetchTransationByHash(hash string) Transaction {
 	var result Transaction
 
 	if err := json.Unmarshal(getResponse(`transaction/`+hash, nil), &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		panic(err)
 	}
 
 	fmt.Println(prettyPrint(result))
@@ -87,7 +87,7 @@ func FetchLatestTransactionHashes(address string) Transaction {
 	var result Transaction
 
 	if err := json.Unmarshal(getResponse(`transaction-hashes/`+address, nil), &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		panic(err)
 	}
 
 	fmt.Println(prettyPrint(result))
@@ -99,7 +99,7 @@ func FetchLatestTransactionsByAddress(address string) Transaction {
 	var result Transaction
 
 	if err := json.Unmarshal(getResponse(`transactions`+address, nil), &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		panic(err)
 	}
 
 	fmt.Println(prettyPrint(result))
@@ -116,7 +116,7 @@ func FetchLatestTransactions(options LatestTransactionsParams) []Transaction {
 	}
 
 	if err := json.Unmarshal(getResponse(`latest-transactions`, params), &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		panic(err)
 	}
 
 	return result
@@ -126,7 +126,7 @@ func FetchLatestTransactionsInBlock(number string) Transaction {
 	var result Transaction
 
 	if err := json.Unmarshal(getResponse(`block-transactions`+number, nil), &result); err != nil {
-		fmt.Println("Can not unmarshal JSON")
+		panic(err)
 	}
 
 	fmt.Println(prettyPrint(result))
