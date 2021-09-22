@@ -5,5 +5,7 @@ import (
 )
 
 func main() {
-	solana_beach.FetchLatestBlocks(solana_beach.LatestBlocksParams{Limit: "1"})
+	solana_beach.FetchBlock("900")
+
+	// fmt.Println(some)
 }

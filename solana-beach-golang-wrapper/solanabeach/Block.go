@@ -6,22 +6,61 @@ import (
 	"github.com/fatih/structs"
 )
 
-type Programstats struct {
-	Count     int `json:"count"`
-	ProgramID struct {
-		Address string `json:"address"`
-		Name    string `json:"name"`
-		Logo    string `json:"logo"`
-		Ticker  string `json:"ticker"`
-		CmcID   string `json:"cmcId"`
-	} `json:"programId"`
-	Instructions struct {
-	} `json:"instructions"`
+type TopPrograms struct {
+	Window   int `json:"window"`
+	Programs []struct {
+		ProgramID struct {
+			Name    string `json:"name"`
+			Address string `json:"address"`
+			Logo    string `json:"logo,omitempty"`
+			Ticker  string `json:"ticker,omitempty"`
+			CmcID   string `json:"cmcId,omitempty"`
+		} `json:"programId"`
+		Count        int `json:"count"`
+		Instructions struct {
+			Vote                         int `json:"Vote,omitempty"`
+			VoteSwitch                   int `json:"VoteSwitch,omitempty"`
+			Withdraw                     int `json:"Withdraw,omitempty"`
+			UpdateCommission             int `json:"UpdateCommission,omitempty"`
+			NewOrderV3                   int `json:"NewOrderV3,omitempty"`
+			ConsumeEvents                int `json:"ConsumeEvents,omitempty"`
+			CancelOrderByClientIDV2      int `json:"CancelOrderByClientIdV2,omitempty"`
+			SettleFunds                  int `json:"SettleFunds,omitempty"`
+			MatchOrders                  int `json:"MatchOrders,omitempty"`
+			CancelOrderV2                int `json:"CancelOrderV2,omitempty"`
+			Transfer                     int `json:"Transfer,omitempty"`
+			CreateAccount                int `json:"CreateAccount,omitempty"`
+			AdvanceNonceAccount          int `json:"AdvanceNonceAccount,omitempty"`
+			CreateAccountWithSeed        int `json:"CreateAccountWithSeed,omitempty"`
+			MintTo                       int `json:"MintTo,omitempty"`
+			Approve                      int `json:"Approve,omitempty"`
+			CloseAccount                 int `json:"CloseAccount,omitempty"`
+			SetAuthority                 int `json:"SetAuthority,omitempty"`
+			InitializeMint               int `json:"InitializeMint,omitempty"`
+			InitializeAccount            int `json:"InitializeAccount,omitempty"`
+			TransferChecked              int `json:"TransferChecked,omitempty"`
+			Revoke                       int `json:"Revoke,omitempty"`
+			MintToChecked                int `json:"MintToChecked,omitempty"`
+			Burn                         int `json:"Burn,omitempty"`
+			BurnChecked                  int `json:"BurnChecked,omitempty"`
+			Memo                         int `json:"Memo,omitempty"`
+			CreateAssociatedTokenAccount int `json:"CreateAssociatedTokenAccount,omitempty"`
+			Deactivate                   int `json:"Deactivate,omitempty"`
+			Delegate                     int `json:"Delegate,omitempty"`
+			Initialize                   int `json:"Initialize,omitempty"`
+			Authorize                    int `json:"Authorize,omitempty"`
+			Split                        int `json:"Split,omitempty"`
+			Swap                         int `json:"Swap,omitempty"`
+		} `json:"instructions,omitempty"`
+	} `json:"programs"`
 }
 
-type TopPrograms struct {
-	Window   int            `json:"window"`
-	Programs []Programstats `json:"programs"`
+type ProgramID struct {
+	Name    string `json:"name"`
+	Address string `json:"address"`
+	Logo    string `json:"logo,omitempty"`
+	Ticker  string `json:"ticker,omitempty"`
+	CmcID   string `json:"cmcId,omitempty"`
 }
 
 type Block struct {
@@ -41,9 +80,54 @@ type Block struct {
 		Sucessfultxs      int `json:"sucessfultxs"`
 		Innerinstructions int `json:"innerinstructions"`
 	} `json:"metrics"`
-	Programstats []interface{} `json:"programstats"`
-	Rewards      interface{}   `json:"rewards"`
-	Proposer     string        `json:"proposer"`
+	Programstats []struct {
+		Count        int    `json:"count"`
+		ProgramIDRaw string `json:"programId"`
+		ProgramID    struct {
+			Name    string `json:"name"`
+			Address string `json:"address"`
+			Logo    string `json:"logo,omitempty"`
+			Ticker  string `json:"ticker,omitempty"`
+			CmcID   string `json:"cmcId,omitempty"`
+		}
+		Instructions struct {
+			Vote                         int `json:"Vote,omitempty"`
+			VoteSwitch                   int `json:"VoteSwitch,omitempty"`
+			Withdraw                     int `json:"Withdraw,omitempty"`
+			UpdateCommission             int `json:"UpdateCommission,omitempty"`
+			NewOrderV3                   int `json:"NewOrderV3,omitempty"`
+			ConsumeEvents                int `json:"ConsumeEvents,omitempty"`
+			CancelOrderByClientIDV2      int `json:"CancelOrderByClientIdV2,omitempty"`
+			SettleFunds                  int `json:"SettleFunds,omitempty"`
+			MatchOrders                  int `json:"MatchOrders,omitempty"`
+			CancelOrderV2                int `json:"CancelOrderV2,omitempty"`
+			Transfer                     int `json:"Transfer,omitempty"`
+			CreateAccount                int `json:"CreateAccount,omitempty"`
+			AdvanceNonceAccount          int `json:"AdvanceNonceAccount,omitempty"`
+			CreateAccountWithSeed        int `json:"CreateAccountWithSeed,omitempty"`
+			MintTo                       int `json:"MintTo,omitempty"`
+			Approve                      int `json:"Approve,omitempty"`
+			CloseAccount                 int `json:"CloseAccount,omitempty"`
+			SetAuthority                 int `json:"SetAuthority,omitempty"`
+			InitializeMint               int `json:"InitializeMint,omitempty"`
+			InitializeAccount            int `json:"InitializeAccount,omitempty"`
+			TransferChecked              int `json:"TransferChecked,omitempty"`
+			Revoke                       int `json:"Revoke,omitempty"`
+			MintToChecked                int `json:"MintToChecked,omitempty"`
+			Burn                         int `json:"Burn,omitempty"`
+			BurnChecked                  int `json:"BurnChecked,omitempty"`
+			Memo                         int `json:"Memo,omitempty"`
+			CreateAssociatedTokenAccount int `json:"CreateAssociatedTokenAccount,omitempty"`
+			Deactivate                   int `json:"Deactivate,omitempty"`
+			Delegate                     int `json:"Delegate,omitempty"`
+			Initialize                   int `json:"Initialize,omitempty"`
+			Authorize                    int `json:"Authorize,omitempty"`
+			Split                        int `json:"Split,omitempty"`
+			Swap                         int `json:"Swap,omitempty"`
+		} `json:"instructions,omitempty"`
+	} `json:"programstats"`
+	Rewards      interface{} `json:"rewards"`
+	Proposer     string      `json:"proposer"`
 	ProposerData struct {
 		Name       string `json:"name"`
 		Image      string `json:"image"`
@@ -71,8 +155,13 @@ func FetchBlockHash(hash string) Block {
 func FetchBlock(number string) Block {
 	var result Block
 
-	if err := json.Unmarshal(getResponse(`block/`+number, nil), &result); err != nil {
-		panic(err)
+	json.Unmarshal(getResponse(`block/`+number, nil), &result)
+
+	for i := range result.Programstats {
+		var comp ProgramID
+		if err := json.Unmarshal([]byte(result.Programstats[i].ProgramIDRaw), &comp); err != nil {
+		}
+		result.Programstats[i].ProgramID = comp
 	}
 
 	return result
