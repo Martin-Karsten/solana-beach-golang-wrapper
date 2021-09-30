@@ -1,0 +1,127 @@
+{
+  "window": 10000,
+  "programs": [
+    {
+      "programId": {
+        "name": "Vote Program",
+        "address": "Vote111111111111111111111111111111111111111"
+      },
+      "count": 9300177,
+      "instructions": {
+        "Vote": 9285010,
+        "VoteSwitch": 14979,
+        "Withdraw": 187,
+        "InitializeAccount": 1
+      }
+    },
+    {
+      "programId": "unknown",
+      "count": 2164574,
+      "instructions": {}
+    },
+    {
+      "programId": {
+        "name": "Serum V3 Program",
+        "address": "9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin"
+      },
+      "count": 1214269,
+      "instructions": {
+        "NewOrderV3": 160374,
+        "SettleFunds": 55113,
+        "ConsumeEvents": 774150,
+        "CancelOrderByClientIdV2": 219738,
+        "CancelOrderV2": 1032,
+        "MatchOrders": 3862
+      }
+    },
+    {
+      "programId": {
+        "name": "System Program",
+        "address": "11111111111111111111111111111111"
+      },
+      "count": 758320,
+      "instructions": {
+        "Transfer": 727577,
+        "CreateAccount": 29667,
+        "CreateAccountWithSeed": 204,
+        "AdvanceNonceAccount": 57,
+        "AllocateWithSeed": 815
+      }
+    },
+    {
+      "programId": {
+        "name": "SPL Token Program",
+        "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+      },
+      "count": 192949,
+      "instructions": {
+        "Transfer": 36137,
+        "CloseAccount": 110922,
+        "InitializeMint": 2196,
+        "TransferChecked": 2646,
+        "InitializeAccount": 23370,
+        "Approve": 6843,
+        "SetAuthority": 7665,
+        "MintTo": 2162,
+        "Revoke": 996,
+        "MintToChecked": 10,
+        "Burn": 2
+      }
+    },
+    {
+      "programId": {
+        "name": "Memo Program",
+        "address": "Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo"
+      },
+      "count": 19260,
+      "instructions": {
+        "Memo": 19260
+      }
+    },
+    {
+      "programId": {
+        "name": "SPL Associated Token Account Program",
+        "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+      },
+      "count": 13215,
+      "instructions": {
+        "CreateAssociatedTokenAccount": 13215
+      }
+    },
+    {
+      "programId": {
+        "name": "Stake Program",
+        "address": "Stake11111111111111111111111111111111111111"
+      },
+      "count": 2451,
+      "instructions": {
+        "Delegate": 347,
+        "Initialize": 306,
+        "Deactivate": 854,
+        "Authorize": 16,
+        "Split": 818,
+        "Withdraw": 110
+      }
+    },
+    {
+      "programId": {
+        "name": "Swap V2 Program",
+        "address": "SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8"
+      },
+      "count": 97,
+      "instructions": {
+        "Swap": 97
+      }
+    },
+    {
+      "programId": {
+        "name": "Swap Program",
+        "address": "9qvG1zUp8xF1Bi4m6UdRNby1BAAuaDrUxSpv4CmRRMjL"
+      },
+      "count": 5,
+      "instructions": {
+        "Swap": 5
+      }
+    }
+  ]
+}

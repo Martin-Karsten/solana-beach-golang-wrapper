@@ -1,11 +1,16 @@
 package main
 
 import (
+	"encoding/json"
+
 	solana_beach "github.com/Martin-Karsten/solana-beach-golang-wrapper/solanabeach"
 )
 
 func main() {
-	solana_beach.FetchBlock("900")
+	solana_beach.FetchLatestBlocks(solana_beach.LatestBlocksParams{Limit: "2"})
+}
 
-	// fmt.Println(some)
+func prettyPrint(i interface{}) string {
+	s, _ := json.MarshalIndent(i, "", "\t")
+	return string(s)
 }
