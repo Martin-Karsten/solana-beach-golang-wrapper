@@ -1,4 +1,4 @@
-package solana_beach
+package solanabeach
 
 import (
 	"encoding/json"
@@ -16,14 +16,18 @@ type Account []struct {
 	Balance int `json:"balance"`
 }
 
-func FetchAccounts(limit string) Account {
+func FetchAccounts(limit string) (Account, error) {
 	var result Account
 
-	if err := json.Unmarshal(getResponse(`accounts`, nil), &result); err != nil {
+	a, err := getResponseBody(`accounts`, nil)
+	if err != nil {
+		return result, err
+	}
+	if err := json.Unmarshal(a, &result); err != nil {
 		fmt.Println("Can not unmarshal JSON")
 	}
 
 	fmt.Println(prettyPrint(result))
 
-	return result
+	return result, err
 }

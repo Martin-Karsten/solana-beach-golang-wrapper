@@ -1,9 +1,9 @@
-package solana_beach
+package solanabeach
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -20,8 +20,12 @@ func prettyPrint(i interface{}) string {
 	return string(s)
 }
 
-func getResponse(slug string, params map[string]interface{}) []byte {
+func getResponseBody(slug string, params map[string]interface{}) ([]byte, error) {
 	req, err := http.NewRequest("GET", url+slug, nil)
+	if err != nil {
+		return nil, err
+	}
+
 	req.Header.Add("Authorization", bearer)
 
 	if len(params) > 0 && params != nil {
@@ -39,14 +43,15 @@ func getResponse(slug string, params map[string]interface{}) []byte {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Println("Error on response.\n[ERROR] -", err)
+		return nil, err
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Println("Error while reading the response bytes:", err)
+	if resp.StatusCode > 299 {
+		return nil, errors.New(http.StatusText(resp.StatusCode))
 	}
 
-	return body
+	body, err := ioutil.ReadAll(resp.Body)
+
+	return body, err
 }

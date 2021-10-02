@@ -3,11 +3,11 @@ package main
 import (
 	"encoding/json"
 
-	solana_beach "github.com/Martin-Karsten/solana-beach-golang-wrapper/solanabeach"
+	solanabeach "github.com/Martin-Karsten/solana-beach-golang-wrapper/solanabeach"
 )
 
 func main() {
-	solana_beach.FetchLatestBlocks(solana_beach.LatestBlocksParams{Limit: "2"})
+	solanabeach.FetchBlock("9999")
 }
 
 func prettyPrint(i interface{}) string {

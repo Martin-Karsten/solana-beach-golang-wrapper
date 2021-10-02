@@ -1,1 +1,1 @@
-package solana_beach
+package solanabeach

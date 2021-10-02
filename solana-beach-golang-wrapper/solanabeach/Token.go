@@ -1,5 +1,5 @@
-package solana_beach
+package solanabeach
 
 // func FetchTokens() string {
-// 	return getResponse(`tokens`)
+// 	return getResponseBody(`tokens`)
 // }

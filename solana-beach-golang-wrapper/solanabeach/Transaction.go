@@ -1,4 +1,4 @@
-package solana_beach
+package solanabeach
 
 import (
 	"encoding/json"
@@ -71,43 +71,49 @@ type LatestTransactionsParams struct {
 	Cursor string
 }
 
-func FetchTransationByHash(hash string) Transaction {
+func FetchTransationByHash(hash string) (Transaction, error) {
 	var result Transaction
 
-	if err := json.Unmarshal(getResponse(`transaction/`+hash, nil), &result); err != nil {
-		panic(err)
+	t, err := getResponseBody(`transaction/`+hash, nil)
+	if err != nil {
+		return result, err
 	}
+	json.Unmarshal(t, &result)
 
 	fmt.Println(prettyPrint(result))
 
-	return result
+	return result, err
 }
 
-func FetchLatestTransactionHashes(address string) Transaction {
+func FetchLatestTransactionHashes(address string) (Transaction, error) {
 	var result Transaction
 
-	if err := json.Unmarshal(getResponse(`transaction-hashes/`+address, nil), &result); err != nil {
-		panic(err)
+	t, err := getResponseBody(`transaction-hashes/`+address, nil)
+	if err != nil {
+		return result, err
 	}
+	json.Unmarshal(t, &result)
 
 	fmt.Println(prettyPrint(result))
 
-	return result
+	return result, err
 }
 
-func FetchLatestTransactionsByAddress(address string) Transaction {
+func FetchLatestTransactionsByAddress(address string) (Transaction, error) {
 	var result Transaction
 
-	if err := json.Unmarshal(getResponse(`transactions`+address, nil), &result); err != nil {
-		panic(err)
+	t, err := getResponseBody(`transactions`, nil)
+	if err != nil {
+		return result, err
 	}
+	json.Unmarshal(t, &result)
 
 	fmt.Println(prettyPrint(result))
 
-	return result
+	return result, err
 }
 
-func FetchLatestTransactions(options LatestTransactionsParams) []Transaction {
+func FetchLatestTransactions(options LatestTransactionsParams) ([]Transaction, error) {
 	var emptyStruct LatestTransactionsParams
 	var result []Transaction
 	var params = make(map[string]interface{})
@@ -115,21 +121,25 @@ func FetchLatestTransactions(options LatestTransactionsParams) []Transaction {
 		params = structs.Map(options)
 	}
 
-	if err := json.Unmarshal(getResponse(`latest-transactions`, params), &result); err != nil {
-		panic(err)
+	t, err := getResponseBody(`latest-transactions`, params)
+	if err != nil {
+		return result, err
 	}
+	json.Unmarshal(t, &result)
 
-	return result
+	return result, err
 }
 
-func FetchLatestTransactionsInBlock(number string) Transaction {
+func FetchLatestTransactionsInBlock(number string) (Transaction, error) {
 	var result Transaction
 
-	if err := json.Unmarshal(getResponse(`block-transactions`+number, nil), &result); err != nil {
-		panic(err)
+	t, err := getResponseBody(`block-transactions`, nil)
+	if err != nil {
+		return result, err
 	}
+	json.Unmarshal(t, &result)
 
 	fmt.Println(prettyPrint(result))
 
-	return result
+	return result, err
 }

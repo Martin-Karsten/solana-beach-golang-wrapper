@@ -1,4 +1,4 @@
-package solana_beach
+package solanabeach
 
 import (
 	"encoding/json"
@@ -194,25 +194,33 @@ type LatestBlocksParams struct {
 	Cursor string
 }
 
-func FetchBlockHash(hash string) Block {
+func FetchBlock(number string) (Block, error) {
 	var result Block
 
-	if err := json.Unmarshal(getResponse(`block-hash/`+hash, nil), &result); err != nil {
-		panic(err)
+	b, err := getResponseBody(`block/`+number, nil)
+	if err != nil {
+		return result, err
 	}
 
-	return result
+	json.Unmarshal(b, &result)
+
+	return result, err
 }
 
-func FetchBlock(number string) Block {
+func FetchBlockByHash(hash string) (Block, error) {
 	var result Block
 
-	json.Unmarshal(getResponse(`block/`+number, nil), &result)
+	b, err := getResponseBody(`block-hash/`+hash, nil)
+	if err != nil {
+		return result, err
+	}
 
-	return result
+	json.Unmarshal(b, &result)
+
+	return result, err
 }
 
-func FetchLatestBlocks(options LatestBlocksParams) []Block {
+func FetchLatestBlocks(options LatestBlocksParams) ([]Block, error) {
 	var emptyStruct LatestBlocksParams
 	var result []Block
 	var params = make(map[string]interface{})
@@ -220,17 +228,25 @@ func FetchLatestBlocks(options LatestBlocksParams) []Block {
 		params = structs.Map(options)
 	}
 
-	json.Unmarshal(getResponse(`latest-blocks`, params), &result)
-
-	return result
-}
-
-func FetchTopPrograms() TopPrograms {
-	var result TopPrograms
-
-	if err := json.Unmarshal(getResponse(`top-programs`, nil), &result); err != nil {
-		panic(err)
+	b, err := getResponseBody(`latest-blocks`, params)
+	if err != nil {
+		return result, err
 	}
 
-	return result
+	json.Unmarshal(b, &result)
+
+	return result, err
+}
+
+func FetchTopPrograms() (TopPrograms, error) {
+	var result TopPrograms
+
+	b, err := getResponseBody(`top-programs`, nil)
+	if err != nil {
+		return result, err
+	}
+
+	json.Unmarshal(b, &result)
+
+	return result, err
 }
