@@ -2,7 +2,6 @@ package solanabeach
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/fatih/structs"
 )
@@ -80,8 +79,6 @@ func FetchTransationByHash(hash string) (Transaction, error) {
 	}
 	json.Unmarshal(t, &result)
 
-	fmt.Println(prettyPrint(result))
-
 	return result, err
 }
 
@@ -93,8 +90,6 @@ func FetchLatestTransactionHashes(address string) (Transaction, error) {
 		return result, err
 	}
 	json.Unmarshal(t, &result)
-
-	fmt.Println(prettyPrint(result))
 
 	return result, err
 }
@@ -108,8 +103,6 @@ func FetchLatestTransactionsByAddress(address string) (Transaction, error) {
 	}
 	json.Unmarshal(t, &result)
 
-	fmt.Println(prettyPrint(result))
-
 	return result, err
 }
 
@@ -120,7 +113,6 @@ func FetchLatestTransactions(options LatestTransactionsParams) ([]Transaction, e
 	if options != emptyStruct {
 		params = structs.Map(options)
 	}
-
 	t, err := getResponseBody(`latest-transactions`, params)
 	if err != nil {
 		return result, err
@@ -138,8 +130,6 @@ func FetchLatestTransactionsInBlock(number string) (Transaction, error) {
 		return result, err
 	}
 	json.Unmarshal(t, &result)
-
-	fmt.Println(prettyPrint(result))
 
 	return result, err
 }

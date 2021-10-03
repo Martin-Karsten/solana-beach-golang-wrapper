@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	solanabeach.FetchBlock("9999")
+	solanabeach.FetchLatestTransactions(solanabeach.LatestTransactionsParams{Limit: "2"})
 }
 
 func prettyPrint(i interface{}) string {
