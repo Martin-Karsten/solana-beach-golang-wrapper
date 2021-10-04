@@ -7,7 +7,12 @@ import (
 )
 
 func main() {
-	solanabeach.FetchLatestTransactions(solanabeach.LatestTransactionsParams{Limit: "2"})
+	t, err := solanabeach.FetchAccountTokenTransfers(`ARcSeHfseT2u1Qz6g3czMndza5C1ofv7fBnbCewKX3RV`, solanabeach.AccountTokenTransfersParams{Limit: "2"})
+	if err != nil {
+		println(err.Error())
+	}
+
+	println(prettyPrint(t))
 }
 
 func prettyPrint(i interface{}) string {
