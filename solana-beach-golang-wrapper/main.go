@@ -8,12 +8,12 @@ import (
 )
 
 func main() {
-	t, err := solanabeach.FetchSupply()
+	t, err := solanabeach.FetchMarketChartData()
 	if err != nil {
 		println(err.Error())
 	}
 
-	fmt.Println(t.NonCirculating)
+	fmt.Println(prettyPrint(t))
 }
 
 func prettyPrint(i interface{}) string {
