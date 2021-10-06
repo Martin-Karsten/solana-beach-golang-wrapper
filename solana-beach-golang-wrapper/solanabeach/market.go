@@ -433,11 +433,11 @@ func FetchMarkets(options FetchMarketsParams) (MarketsResponse, error) {
 	}
 
 	if !containsParams(MarketSortByParams, options.Sort) {
-		errorMessage := "TokenSortByParam must be [" + stringParams(MarketSortByParams) + "]"
+		errorMessage := "MarketSortByParam must be [" + stringParams(MarketSortByParams) + "]"
 		return result, errors.New(errorMessage)
 	}
 	if !containsParams(MarketSortDirectionParams, options.Dir) {
-		errorMessage := "TokenSortByParam must be " + stringParams(MarketSortDirectionParams)
+		errorMessage := "MarketSortByParam must be " + stringParams(MarketSortDirectionParams)
 		return result, errors.New(errorMessage)
 	}
 

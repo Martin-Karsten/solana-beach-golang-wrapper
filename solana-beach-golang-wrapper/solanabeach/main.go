@@ -42,6 +42,10 @@ func getResponseBody(slug string, params map[string]interface{}) ([]byte, error)
 					q.Add(strings.ToLower(param), tValue.String())
 				case MarketSortDirectionParam:
 					q.Add(strings.ToLower(param), tValue.String())
+				case TokenSwapSortByParam:
+					q.Add(strings.ToLower(param), tValue.String())
+				case TokenSwapSortDirectionParam:
+					q.Add(strings.ToLower(param), tValue.String())
 				default:
 					q.Add(strings.ToLower(param), value.(string))
 				}
@@ -93,6 +97,18 @@ func containsParams(params interface{}, element interface{}) bool {
 				return true
 			}
 		}
+	case [4]TokenSwapSortByParam:
+		for _, i := range t {
+			if i == element {
+				return true
+			}
+		}
+	case [2]TokenSwapSortDirectionParam:
+		for _, i := range t {
+			if i == element {
+				return true
+			}
+		}
 	}
 	return false
 }
@@ -131,6 +147,26 @@ func stringParams(params interface{}) string {
 			}
 		}
 	case [2]MarketSortDirectionParam:
+		{
+			for _, str := range t {
+				if len(result) == 0 {
+					result += str.String()
+				} else {
+					result += ", " + str.String()
+				}
+			}
+		}
+	case [4]TokenSwapSortByParam:
+		{
+			for _, str := range t {
+				if len(result) == 0 {
+					result += str.String()
+				} else {
+					result += ", " + str.String()
+				}
+			}
+		}
+	case [2]TokenSwapSortDirectionParam:
 		{
 			for _, str := range t {
 				if len(result) == 0 {

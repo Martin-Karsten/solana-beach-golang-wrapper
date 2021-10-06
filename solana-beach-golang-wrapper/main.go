@@ -8,10 +8,10 @@ import (
 )
 
 func main() {
-	t, err := solanabeach.FetchMarkets(solanabeach.FetchMarketsParams{
+	t, err := solanabeach.FetchTokenSwaps(solanabeach.FetchTokenSwapsParams{
 		Limit: "2",
-		Sort:  solanabeach.MarketSortByPrice,
-		Dir:   solanabeach.MarketSortDirDesc,
+		Sort:  solanabeach.TokenSwapSortByName,
+		Dir:   solanabeach.TokenSwapSortDirAsc,
 	})
 	if err != nil {
 		println(err.Error())
