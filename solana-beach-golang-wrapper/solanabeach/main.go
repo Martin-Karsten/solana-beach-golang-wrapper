@@ -33,7 +33,14 @@ func getResponseBody(slug string, params map[string]interface{}) ([]byte, error)
 
 		for param, value := range params {
 			if value != "" {
-				q.Add(strings.ToLower(param), value.(string))
+				switch tValue := value.(type) {
+				case TokenSortByParam:
+					q.Add(strings.ToLower(param), tValue.String())
+				case TokenSortDirectionParam:
+					q.Add(strings.ToLower(param), tValue.String())
+				default:
+					q.Add(strings.ToLower(param), value.(string))
+				}
 			}
 		}
 

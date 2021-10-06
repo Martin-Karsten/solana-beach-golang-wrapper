@@ -227,7 +227,6 @@ func FetchLatestBlocks(options LatestBlocksParams) ([]Block, error) {
 	if options != emptyStruct {
 		params = structs.Map(options)
 	}
-
 	b, err := getResponseBody(`latest-blocks`, params)
 	if err != nil {
 		return result, err
