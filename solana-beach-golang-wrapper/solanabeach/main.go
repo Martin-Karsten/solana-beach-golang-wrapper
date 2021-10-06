@@ -38,6 +38,10 @@ func getResponseBody(slug string, params map[string]interface{}) ([]byte, error)
 					q.Add(strings.ToLower(param), tValue.String())
 				case TokenSortDirectionParam:
 					q.Add(strings.ToLower(param), tValue.String())
+				case MarketSortByParam:
+					q.Add(strings.ToLower(param), tValue.String())
+				case MarketSortDirectionParam:
+					q.Add(strings.ToLower(param), tValue.String())
 				default:
 					q.Add(strings.ToLower(param), value.(string))
 				}
@@ -61,4 +65,82 @@ func getResponseBody(slug string, params map[string]interface{}) ([]byte, error)
 	body, err := ioutil.ReadAll(resp.Body)
 
 	return body, err
+}
+
+func containsParams(params interface{}, element interface{}) bool {
+	switch t := params.(type) {
+	case [9]TokenSortByParam:
+		for _, i := range t {
+			if i == element {
+				return true
+			}
+		}
+	case [2]TokenSortDirectionParam:
+		for _, i := range t {
+			if i == element {
+				return true
+			}
+		}
+	case [4]MarketSortByParam:
+		for _, i := range t {
+			if i == element {
+				return true
+			}
+		}
+	case [2]MarketSortDirectionParam:
+		for _, i := range t {
+			if i == element {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func stringParams(params interface{}) string {
+	result := ""
+	switch t := params.(type) {
+	case [9]TokenSortByParam:
+		{
+			for _, str := range t {
+				if len(result) == 0 {
+					result += str.String()
+				} else {
+					result += ", " + str.String()
+				}
+			}
+		}
+	case [2]TokenSortDirectionParam:
+		{
+			for _, str := range t {
+				if len(result) == 0 {
+					result += str.String()
+				} else {
+					result += ", " + str.String()
+				}
+			}
+		}
+	case [4]MarketSortByParam:
+		{
+			for _, str := range t {
+				if len(result) == 0 {
+					result += str.String()
+				} else {
+					result += ", " + str.String()
+				}
+			}
+		}
+	case [2]MarketSortDirectionParam:
+		{
+			for _, str := range t {
+				if len(result) == 0 {
+					result += str.String()
+				} else {
+					result += ", " + str.String()
+				}
+			}
+		}
+	}
+
+	return result
 }

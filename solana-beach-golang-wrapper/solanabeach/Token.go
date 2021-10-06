@@ -167,25 +167,32 @@ type Token struct {
 type TokenSortByParam string
 type TokenSortDirectionParam string
 
+type FetchTokensParams struct {
+	Limit  string
+	Offset string
+	Sort   TokenSortByParam
+	Dir    TokenSortDirectionParam
+}
+
 const (
-	SortByName         TokenSortByParam = "name"
-	SortByPrice        TokenSortByParam = "price"
-	SortByVolume       TokenSortByParam = "volume"
-	SortByChange       TokenSortByParam = "change"
-	SortByHolders      TokenSortByParam = "holders"
-	SortBySwapVolume   TokenSortByParam = "swapVolume"
-	SortBySwapPrice    TokenSortByParam = "swapPrice"
-	SortByMarketVolume TokenSortByParam = "marketVolume"
-	SortByMarketPrice  TokenSortByParam = "marketPrice"
+	TokenSortByName         TokenSortByParam = "name"
+	TokenSortByPrice        TokenSortByParam = "price"
+	TokenSortByVolume       TokenSortByParam = "volume"
+	TokenSortByChange       TokenSortByParam = "change"
+	TokenSortByHolders      TokenSortByParam = "holders"
+	TokenSortBySwapVolume   TokenSortByParam = "swapVolume"
+	TokenSortBySwapPrice    TokenSortByParam = "swapPrice"
+	TokenSortByMarketVolume TokenSortByParam = "marketVolume"
+	TokenSortByMarketPrice  TokenSortByParam = "marketPrice"
 )
 
 const (
-	SortDirAsc  TokenSortDirectionParam = "asc"
-	SortDirDesc TokenSortDirectionParam = "desc"
+	TokenSortDirAsc  TokenSortDirectionParam = "asc"
+	TokenSortDirDesc TokenSortDirectionParam = "desc"
 )
 
-var TokenSortByParams = [9]TokenSortByParam{SortByName, SortByPrice, SortByVolume, SortByChange, SortByHolders, SortBySwapVolume, SortBySwapPrice, SortByMarketVolume, SortByMarketPrice}
-var TokenSortDirectionParams = [2]TokenSortDirectionParam{SortDirAsc, SortDirDesc}
+var tokenSortByParams = [9]TokenSortByParam{TokenSortByName, TokenSortByPrice, TokenSortByVolume, TokenSortByChange, TokenSortByHolders, TokenSortBySwapVolume, TokenSortBySwapPrice, TokenSortByMarketVolume, TokenSortByMarketPrice}
+var tokenSortDirectionParams = [2]TokenSortDirectionParam{TokenSortDirAsc, TokenSortDirDesc}
 
 func (t TokenSortByParam) String() string {
 	return string(t)
@@ -195,76 +202,23 @@ func (t TokenSortDirectionParam) String() string {
 	return string(t)
 }
 
-func containsParams(params interface{}, element interface{}) bool {
-	switch t := params.(type) {
-	case [9]TokenSortByParam:
-		for _, i := range t {
-			if i == element {
-				return true
-			}
-		}
-	case [2]TokenSortDirectionParam:
-		for _, i := range t {
-			if i == element {
-				return true
-			}
-		}
-	}
-	return false
-}
-
-func stringParams(params interface{}) string {
-	result := ""
-	switch t := params.(type) {
-	case [9]TokenSortByParam:
-		{
-			for _, str := range t {
-				if len(result) == 0 {
-					result += str.String()
-				} else {
-					result += ", " + str.String()
-				}
-			}
-		}
-	case [2]TokenSortDirectionParam:
-		{
-			for _, str := range t {
-				if len(result) == 0 {
-					result += str.String()
-				} else {
-					result += ", " + str.String()
-				}
-			}
-		}
-	}
-
-	return result
-}
-
-type FetchTokensParams struct {
-	Limit  string
-	Offset string
-	Sort   TokenSortByParam
-	Dir    TokenSortDirectionParam
-}
-
 func FetchTokens(options FetchTokensParams) (TokenResponse, error) {
 	var emptyStruct FetchTokensParams
 	var result TokenResponse
 
 	if options.Sort == "" {
-		options.Sort = SortByName
+		options.Sort = TokenSortByName
 	}
 	if options.Dir == "" {
-		options.Dir = SortDirAsc
+		options.Dir = TokenSortDirAsc
 	}
 
-	if !containsParams(TokenSortByParams, options.Sort) {
-		errorMessage := "TokenSortByParam must be [" + stringParams(TokenSortByParams) + "]"
+	if !containsParams(tokenSortByParams, options.Sort) {
+		errorMessage := "TokenSortByParam must be [" + stringParams(tokenSortByParams) + "]"
 		return result, errors.New(errorMessage)
 	}
-	if !containsParams(TokenSortDirectionParams, options.Dir) {
-		errorMessage := "TokenSortByParam must be " + stringParams(TokenSortDirectionParams)
+	if !containsParams(tokenSortDirectionParams, options.Dir) {
+		errorMessage := "TokenSortByParam must be " + stringParams(tokenSortDirectionParams)
 		return result, errors.New(errorMessage)
 	}
 
