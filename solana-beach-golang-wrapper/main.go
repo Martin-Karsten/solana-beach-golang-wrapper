@@ -8,16 +8,12 @@ import (
 )
 
 func main() {
-	t, err := solanabeach.FetchTokenSwaps(solanabeach.FetchTokenSwapsParams{
-		Limit: "2",
-		Sort:  solanabeach.TokenSwapSortByName,
-		Dir:   solanabeach.TokenSwapSortDirAsc,
-	})
+	t, err := solanabeach.FetchSupply()
 	if err != nil {
 		println(err.Error())
 	}
 
-	fmt.Println(prettyPrint(t))
+	fmt.Println(t.NonCirculating)
 }
 
 func prettyPrint(i interface{}) string {
