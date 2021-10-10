@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	t, err := solanabeach.FetchMarketChartData()
+	t, err := solanabeach.FetchMarkets(solanabeach.FetchMarketsParams{})
 	if err != nil {
 		println(err.Error())
 	}

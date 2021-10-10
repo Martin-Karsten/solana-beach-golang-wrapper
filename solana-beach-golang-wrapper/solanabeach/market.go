@@ -67,8 +67,8 @@ type MarketsResponse struct {
 			Name        string `json:"name"`
 			MarketPrice int    `json:"marketPrice"`
 			OrderBooks  struct {
-				Asks [][]int `json:"asks"`
-				Bids [][]int `json:"bids"`
+				Asks [][]float64 `json:"asks"`
+				Bids [][]float64 `json:"bids"`
 			} `json:"orderBooks"`
 			Liquidity struct {
 				Total    int `json:"total"`
@@ -96,8 +96,11 @@ type MarketsResponse struct {
 					Decimals int `json:"decimals"`
 				} `json:"quote"`
 			} `json:"volume"`
-			Volumes   []int `json:"volumes"`
-			Volume24H int   `json:"volume24h"`
+			Volumes []struct {
+				Volume    int `json:"volume"`
+				Timestamp int `json:"timestamp"`
+			} `json:"volumes"`
+			Volume24H int `json:"volume24h"`
 		} `json:"meta"`
 	} `json:"data"`
 }
@@ -167,8 +170,8 @@ type MarketBaseMint struct {
 		Name        string `json:"name"`
 		MarketPrice int    `json:"marketPrice"`
 		OrderBooks  struct {
-			Asks [][]int `json:"asks"`
-			Bids [][]int `json:"bids"`
+			Asks [][]float64 `json:"asks"`
+			Bids [][]float64 `json:"bids"`
 		} `json:"orderBooks"`
 		Liquidity struct {
 			Total    int `json:"total"`
@@ -196,8 +199,11 @@ type MarketBaseMint struct {
 				Decimals int `json:"decimals"`
 			} `json:"quote"`
 		} `json:"volume"`
-		Volumes   []int `json:"volumes"`
-		Volume24H int   `json:"volume24h"`
+		Volumes []struct {
+			Volume    int `json:"volume"`
+			Timestamp int `json:"timestamp"`
+		} `json:"volumes"`
+		Volume24H int `json:"volume24h"`
 	} `json:"meta"`
 }
 
@@ -264,8 +270,8 @@ type QuoteMint struct {
 		Name        string `json:"name"`
 		MarketPrice int    `json:"marketPrice"`
 		OrderBooks  struct {
-			Asks [][]int `json:"asks"`
-			Bids [][]int `json:"bids"`
+			Asks [][]float64 `json:"asks"`
+			Bids [][]float64 `json:"bids"`
 		} `json:"orderBooks"`
 		Liquidity struct {
 			Total    int `json:"total"`
@@ -293,8 +299,11 @@ type QuoteMint struct {
 				Decimals int `json:"decimals"`
 			} `json:"quote"`
 		} `json:"volume"`
-		Volumes   []int `json:"volumes"`
-		Volume24H int   `json:"volume24h"`
+		Volumes []struct {
+			Volume    int `json:"volume"`
+			Timestamp int `json:"timestamp"`
+		} `json:"volumes"`
+		Volume24H int `json:"volume24h"`
 	} `json:"meta"`
 }
 
@@ -361,8 +370,8 @@ type Market struct {
 		Name        string `json:"name"`
 		MarketPrice int    `json:"marketPrice"`
 		OrderBooks  struct {
-			Asks [][]int `json:"asks"`
-			Bids [][]int `json:"bids"`
+			Asks [][]float64 `json:"asks"`
+			Bids [][]float64 `json:"bids"`
 		} `json:"orderBooks"`
 		Liquidity struct {
 			Total    int `json:"total"`
@@ -390,8 +399,11 @@ type Market struct {
 				Decimals int `json:"decimals"`
 			} `json:"quote"`
 		} `json:"volume"`
-		Volumes   []int `json:"volumes"`
-		Volume24H int   `json:"volume24h"`
+		Volumes []struct {
+			Volume    int `json:"volume"`
+			Timestamp int `json:"timestamp"`
+		} `json:"volumes"`
+		Volume24H int `json:"volume24h"`
 	} `json:"meta"`
 }
 

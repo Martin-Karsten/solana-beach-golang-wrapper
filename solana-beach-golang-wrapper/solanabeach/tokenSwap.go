@@ -95,8 +95,11 @@ type TokenSwapsResponse struct {
 				AperB int `json:"AperB"`
 				BperA int `json:"BperA"`
 			} `json:"prices"`
-			Volumes   []int `json:"volumes"`
-			Volume24H int   `json:"volume24h"`
+			Volumes []struct {
+				Volume    int `json:"volume"`
+				Timestamp int `json:"timestamp"`
+			} `json:"volumes"`
+			Volume24H int `json:"volume24h"`
 		} `json:"meta"`
 	} `json:"data"`
 }
@@ -194,8 +197,11 @@ type TokenSwapsMint struct {
 			AperB int `json:"AperB"`
 			BperA int `json:"BperA"`
 		} `json:"prices"`
-		Volumes   []int `json:"volumes"`
-		Volume24H int   `json:"volume24h"`
+		Volumes []struct {
+			Volume    int `json:"volume"`
+			Timestamp int `json:"timestamp"`
+		} `json:"volumes"`
+		Volume24H int `json:"volume24h"`
 	} `json:"meta"`
 }
 
@@ -290,8 +296,11 @@ type TokenSwap struct {
 			AperB int `json:"AperB"`
 			BperA int `json:"BperA"`
 		} `json:"prices"`
-		Volumes   []int `json:"volumes"`
-		Volume24H int   `json:"volume24h"`
+		Volumes []struct {
+			Volume    int `json:"volume"`
+			Timestamp int `json:"timestamp"`
+		} `json:"volumes"`
+		Volume24H int `json:"volume24h"`
 	} `json:"meta"`
 }
 
